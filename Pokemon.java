@@ -77,16 +77,16 @@ public class Pokemon {
     public String toString(){
         return "Pokemon{ " +
         "nombre ='" + nombre + '\'' +
-                ", type1='" + tipo1 + '\'' +
-                ", type2='" + tipo2 + '\'' +
+                ", tipo1='" + tipo1 + '\'' +
+                ", tipo2='" + tipo2 + '\'' +
                 ", total=" + total +
                 ", hp=" + hp +
-                ", attack=" + ataque +
-                ", defense=" + ataque +
-                ", spAttack=" + spAtaque +
-                ", spDefense=" + spDefensa +
-                ", speed=" + velocidad +
-                ", abilities=" + habilidades +
+                ", ataque=" + ataque +
+                ", defensa=" + ataque +
+                ", spAtaque=" + spAtaque +
+                ", spDefensa=" + spDefensa +
+                ", velocidad=" + velocidad +
+                ", habilidades=" + habilidades +
                 '}';
     }
 }

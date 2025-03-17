@@ -6,7 +6,11 @@ public class PokemonManager {
     private Map<String, Pokemon> pokemonCollection;
 
     public PokemonManager(String mapType) {
-        this.pokemonCollection = PokemonMapFactory.createMap(mapType);
+        try {
+            this.pokemonCollection = PokemonMapFactory.createMap(mapType);
+        } catch (IllegalArgumentException e) {
+            throw new RuntimeException("Error al crear el mapa de Pokémon: " + e.getMessage());
+        }
     }
 
     public String addPokemon(Pokemon pokemon) {
@@ -26,8 +30,18 @@ public class PokemonManager {
 
     public List<Pokemon> getPokemonSortedByType() {
         List<Pokemon> sortedList = new ArrayList<>(pokemonCollection.values());
-        sortedList.sort((p1, p2) -> p1.getTipo1().compareTo(p2.getTipo1()));
+        sortedList.sort((p1, p2) -> {
+            int cmp = p1.getTipo1().compareTo(p2.getTipo1());
+            return (cmp != 0) ? cmp : p1.getTipo2().compareTo(p2.getTipo2());
+        });
         return sortedList;
+    }
+
+    public String removePokemon(String name) {
+        if (pokemonCollection.remove(name) != null) {
+            return "Pokémon " + name + " eliminado.";
+        }
+        return "Pokémon no encontrado.";
     }
 
     public void displayCollection() {
