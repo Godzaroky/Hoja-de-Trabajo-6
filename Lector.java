@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Lector {
     public static Map<String, Pokemon> cargarPokemonsDesdeCSV(String rutaArchivo) {
-        Map<String, Pokemon> pokemonMap = new HashMap<>()();
+        Map<String, Pokemon> pokemonMap = new HashMap<String, Pokemon>();
         
         try (BufferedReader br = new BufferedReader(new FileReader(rutaArchivo))) {
             String linea;
@@ -14,28 +14,28 @@ public class Lector {
                 
                 if (datos.length < 10) continue; // Verificar que tenga suficientes columnas
                 
-                String name = datos[1].trim();
-                String type1 = datos[2].trim();
-                String type2 = datos[3].trim().isEmpty() ? "None" : datos[3].trim();
+                String nombre = datos[1].trim();
+                String tipo1 = datos[2].trim();
+                String tipo2 = datos[3].trim().isEmpty() ? "None" : datos[3].trim();
                 int total = Integer.parseInt(datos[4].trim());
                 int hp = Integer.parseInt(datos[5].trim());
-                int attack = Integer.parseInt(datos[6].trim());
-                int defense = Integer.parseInt(datos[7].trim());
-                int spAttack = Integer.parseInt(datos[8].trim());
-                int spDefense = Integer.parseInt(datos[9].trim());
-                int speed = Integer.parseInt(datos[10].trim());
+                int ataque = Integer.parseInt(datos[6].trim());
+                int defensa = Integer.parseInt(datos[7].trim());
+                int spAtaque = Integer.parseInt(datos[8].trim());
+                int spDefensa = Integer.parseInt(datos[9].trim());
+                int velocidad = Integer.parseInt(datos[10].trim());
                 
-                List<String> abilities = new ArrayList<>();
+                List<String> habilidades = new ArrayList<>();
                 if (datos.length > 11) {
-                    String[] abilitiesArray = datos[11].replace("[", "").replace("]", "").split(";");
-                    for (String ability : abilitiesArray) {
-                        abilities.add(ability.trim());
+                    String[] habilidadesArray = datos[11].replace("[", "").replace("]", "").split(";");
+                    for (String ability : habilidadesArray) {
+                        habilidades.add(ability.trim());
                     }
                 }
                 
                 // Crear objeto Pokemon y agregarlo al mapa
-                Pokemon pokemon = new Pokemon(name, type1, type2, total, hp, attack, defense, spAttack, spDefense, speed, abilities);
-                pokemonMap.put(name, pokemon);
+                Pokemon pokemon = new Pokemon(nombre, tipo1, tipo2, total, hp, ataque, defensa, spAtaque, spDefensa, velocidad, habilidades);
+                pokemonMap.put(nombre, pokemon);
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo CSV: " + e.getMessage());
